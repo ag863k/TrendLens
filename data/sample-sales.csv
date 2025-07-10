@@ -1,0 +1,11 @@
+Date,ProductName,Category,Amount,Quantity,CustomerName,Region,SalesRep
+2024-01-15,Laptop Pro X1,Electronics,1299.99,1,Tech Corp,North,John Smith
+2024-01-16,Wireless Mouse,Electronics,29.99,2,Small Business LLC,South,Jane Doe
+2024-01-17,Office Chair,Furniture,299.99,1,Enterprise Inc,East,Bob Wilson
+2024-01-18,Smartphone Y2,Electronics,799.99,1,Tech Corp,North,John Smith
+2024-01-19,Desk Lamp,Furniture,79.99,3,Home Office,West,Alice Brown
+2024-01-20,Tablet Z3,Electronics,499.99,1,Small Business LLC,South,Jane Doe
+2024-01-21,Gaming Keyboard,Electronics,149.99,1,Tech Startup,North,John Smith
+2024-01-22,Standing Desk,Furniture,599.99,1,Enterprise Inc,East,Bob Wilson
+2024-01-23,Webcam HD,Electronics,89.99,2,Remote Worker,West,Alice Brown
+2024-01-24,Monitor 4K,Electronics,399.99,1,Tech Corp,North,John Smith
