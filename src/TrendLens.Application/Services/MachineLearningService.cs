@@ -645,10 +645,10 @@ internal sealed class CLVCalculator
         }
 
         var mean = intervals.Average();
-        var variance = intervals.Sum(x => Math.Pow(x - mean, 2)) / intervals.Count;
+        var variance = intervals.Sum(x => Math.Pow((double)x - mean, 2)) / intervals.Count;
         var coefficientOfVariation = Math.Sqrt(variance) / mean;
 
-        return (decimal)Math.Max(0.1, Math.Min(1.0, 1.0 - (decimal)coefficientOfVariation / 2.0m));
+        return (decimal)Math.Max(0.1, Math.Min(1.0, 1.0 - coefficientOfVariation / 2.0));
     }
 
     private decimal CalculateValueTrend()

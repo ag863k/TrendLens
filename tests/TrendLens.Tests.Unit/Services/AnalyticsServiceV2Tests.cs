@@ -123,7 +123,7 @@ public class AnalyticsServiceV2Tests : IDisposable
         // Should be ordered by revenue descending
         for (int i = 0; i < productsList.Count - 1; i++)
         {
-            Assert.True(productsList[i].Revenue >= productsList[i + 1].Revenue);
+            Assert.True(productsList[i].TotalRevenue >= productsList[i + 1].TotalRevenue);
         }
     }
 

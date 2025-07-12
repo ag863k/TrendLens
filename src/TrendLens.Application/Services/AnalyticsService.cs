@@ -1,4 +1,4 @@
-ahusing Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging;
 using System.Globalization;
 using TrendLens.Core.Common;
 using TrendLens.Core.DTOs;
@@ -61,13 +61,12 @@ public class AnalyticsServiceV2 : IAnalyticsServiceV2
             return sales.GroupBy(s => new { s.Date.Year, s.Date.Month })
                 .Select(g => new MonthlyTrendDto
                 {
-                    Year = g.Key.Year,
-                    Month = g.Key.Month,
+                    Month = $"{g.Key.Year:0000}-{g.Key.Month:00}",
                     Revenue = g.Sum(s => s.Amount),
-                    SalesCount = g.Count()
+                    OrderCount = g.Count(),
+                    AverageOrderValue = g.Count() > 0 ? g.Sum(s => s.Amount) / g.Count() : 0m
                 })
-                .OrderBy(t => t.Year)
-                .ThenBy(t => t.Month);
+                .OrderBy(t => t.Month);
         }
         catch (Exception ex)
         {
@@ -86,10 +85,13 @@ public class AnalyticsServiceV2 : IAnalyticsServiceV2
                 .Select(g => new ProductPerformanceDto
                 {
                     ProductName = g.Key,
-                    Revenue = g.Sum(s => s.Amount),
-                    UnitsSold = g.Sum(s => s.Quantity)
+                    Category = g.First().Category,
+                    TotalRevenue = g.Sum(s => s.Amount),
+                    TotalQuantity = g.Sum(s => s.Quantity),
+                    AveragePrice = g.Sum(s => s.Quantity) > 0 ? g.Sum(s => s.Amount) / (decimal)g.Sum(s => s.Quantity) : 0m,
+                    OrderCount = g.Count()
                 })
-                .OrderByDescending(p => p.Revenue)
+                .OrderByDescending(p => p.TotalRevenue)
                 .Take(count);
         }
         catch (Exception ex)
@@ -114,8 +116,8 @@ public class AnalyticsServiceV2 : IAnalyticsServiceV2
                     var lastYearRevenue = lastYearSales.Where(s => s.Region == g.Key).Sum(s => s.Amount);
                     var currentRevenue = g.Sum(s => s.Amount);
                     var growthPercentage = lastYearRevenue > 0 
-                        ? ((currentRevenue - lastYearRevenue) / lastYearRevenue) * 100 
-                        : 0;
+                        ? ((currentRevenue - lastYearRevenue) / lastYearRevenue) * 100m 
+                        : 0m;
 
                     return new RegionalPerformanceDto
                     {
