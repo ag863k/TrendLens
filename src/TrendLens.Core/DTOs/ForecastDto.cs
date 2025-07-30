@@ -3,141 +3,142 @@ using System.ComponentModel.DataAnnotations;
 namespace TrendLens.Core.DTOs;
 
 /// <summary>
-/// DTO for monthly sales trend data
+/// DTO representing monthly sales trend data.
 /// </summary>
 public sealed class MonthlyTrendDto
 {
     /// <summary>
-    /// Month and year (e.g., "2024-01")
+    /// Month and year (e.g., "2024-01").
     /// </summary>
-    [Required]
+    [Required, StringLength(7, MinimumLength = 7)]
     public string Month { get; init; } = string.Empty;
 
     /// <summary>
-    /// Total revenue for the month
+    /// Total revenue for the month.
     /// </summary>
     [Range(0, double.MaxValue)]
     public decimal Revenue { get; init; }
 
     /// <summary>
-    /// Total number of orders
+    /// Total number of orders.
     /// </summary>
     [Range(0, int.MaxValue)]
     public int OrderCount { get; init; }
 
     /// <summary>
-    /// Average order value
+    /// Average order value.
     /// </summary>
     [Range(0, double.MaxValue)]
     public decimal AverageOrderValue { get; init; }
 
     /// <summary>
-    /// Percentage change from previous month
+    /// Percentage change from the previous month.
     /// </summary>
     public decimal PercentageChange { get; init; }
 
     /// <summary>
-    /// Growth trend indicator
+    /// Growth trend indicator (e.g., "up", "down", "flat").
     /// </summary>
+    [StringLength(20)]
     public string Trend { get; init; } = string.Empty;
 }
 
 /// <summary>
-/// DTO for product performance data
+/// DTO representing product performance data.
 /// </summary>
 public sealed class ProductPerformanceDto
 {
     /// <summary>
-    /// Product name
+    /// Product name.
     /// </summary>
-    [Required]
+    [Required, StringLength(100)]
     public string ProductName { get; init; } = string.Empty;
 
     /// <summary>
-    /// Product category
+    /// Product category.
     /// </summary>
-    [Required]
+    [Required, StringLength(100)]
     public string Category { get; init; } = string.Empty;
 
     /// <summary>
-    /// Total revenue for the product
+    /// Total revenue for the product.
     /// </summary>
     [Range(0, double.MaxValue)]
     public decimal TotalRevenue { get; init; }
 
     /// <summary>
-    /// Total quantity sold
+    /// Total quantity sold.
     /// </summary>
     [Range(0, int.MaxValue)]
     public int TotalQuantity { get; init; }
 
     /// <summary>
-    /// Average price per unit
+    /// Average price per unit.
     /// </summary>
     [Range(0, double.MaxValue)]
     public decimal AveragePrice { get; init; }
 
     /// <summary>
-    /// Number of orders for this product
+    /// Number of orders for this product.
     /// </summary>
     [Range(0, int.MaxValue)]
     public int OrderCount { get; init; }
 
     /// <summary>
-    /// Market share percentage
+    /// Market share percentage (0–100).
     /// </summary>
     [Range(0, 100)]
     public decimal MarketShare { get; init; }
 
     /// <summary>
-    /// Growth rate compared to previous period
+    /// Growth rate compared to the previous period.
     /// </summary>
     public decimal GrowthRate { get; init; }
 }
 
 /// <summary>
-/// DTO for sales forecast data
+/// DTO representing sales forecast data.
 /// </summary>
 public sealed class SalesForecastDto
 {
     /// <summary>
-    /// Forecast date
+    /// Forecast date.
     /// </summary>
-    [Required]
+    [Required, DataType(DataType.Date)]
     public DateTime Date { get; init; }
 
     /// <summary>
-    /// Predicted revenue for the date
+    /// Predicted revenue for the forecast date.
     /// </summary>
     [Range(0, double.MaxValue)]
     public decimal PredictedRevenue { get; init; }
 
     /// <summary>
-    /// Confidence interval percentage
+    /// Confidence interval percentage (0–100).
     /// </summary>
     [Range(0, 100)]
     public decimal ConfidenceInterval { get; init; }
 
     /// <summary>
-    /// Lower bound of the prediction
+    /// Lower bound of the forecast.
     /// </summary>
     [Range(0, double.MaxValue)]
     public decimal LowerBound { get; init; }
 
     /// <summary>
-    /// Upper bound of the prediction
+    /// Upper bound of the forecast.
     /// </summary>
     [Range(0, double.MaxValue)]
     public decimal UpperBound { get; init; }
 
     /// <summary>
-    /// Type of forecast (statistical, ml_service, emergency)
+    /// Type of forecast (e.g., "statistical", "ml_service", "emergency").
     /// </summary>
-    [Required]
+    [Required, StringLength(50)]
     public string ForecastType { get; init; } = string.Empty;
 
     /// <summary>
-    /// Additional metadata about the forecast
+    /// Additional metadata for the forecast.
     /// </summary>
     public Dictionary<string, object> Metadata { get; init; } = new();
 }
